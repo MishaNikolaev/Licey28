@@ -1,4 +1,4 @@
-package com.example.yourlicey28.presentation.firstScreen
+package com.example.yourlicey28.presentation.welcomeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,33 +15,28 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.yourlicey28.R
+import com.example.yourlicey28.navgraph.Screens
 import com.example.yourlicey28.ui.theme.Blue
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun FirstScreen() {
+fun WelcomeScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -84,7 +79,9 @@ fun FirstScreen() {
             )
             Spacer(modifier = Modifier.height(48.dp))
             Button(
-                onClick = { /* TODO: Handle click here */ },
+                onClick = {
+                    navController.navigate(Screens.Home.route)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)

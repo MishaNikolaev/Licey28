@@ -5,25 +5,26 @@ import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.yourlicey28.R
 
-sealed class Screens(val route: String, val imageVector: ImageVector, val label: String) {
+sealed class Screens(val route: String, val imageVector: Int, val label: String) {
 
     object Home : Screens(
         route = NavCons.home,
         label = "Главная",
-        imageVector = Icons.Rounded.Home
+        imageVector = R.drawable.ic_home
     )
 
     object News : Screens(
         route = NavCons.news,
         label = "Новости",
-        imageVector = Icons.Rounded.DateRange
+        imageVector = R.drawable.ic_news
     )
 
     object Profile : Screens(
         route = NavCons.profile,
         label = "Профиль",
-        imageVector = Icons.Rounded.Person
+        imageVector = R.drawable.ic_profile
     )
 }
 

@@ -28,7 +28,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -62,7 +64,7 @@ fun BottomNav(
                     selectedIndex = index
                 },
                 icon = {
-                    Icon(imageVector = screens.imageVector, contentDescription = "")
+                    Icon(imageVector = ImageVector.vectorResource(id = screens.imageVector), contentDescription = "")
                 },
                 label = {
                     Text(text = screens.label)
