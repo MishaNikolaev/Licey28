@@ -15,7 +15,10 @@ fun NavGraphBuilder.welcomeGraph(
         route = Graph.WELCOME
     ) {
         composable(route = WelcomeGraphScreen.WelcomeScreen.route) {
-            WelcomeScreen(navController = navController)
+            WelcomeScreen(
+                onClick = {
+                    navController.navigate(route=Graph.HOME)
+                })
         }
     }
 }

@@ -36,7 +36,7 @@ import com.example.yourlicey28.ui.theme.Blue
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun WelcomeScreen(navController: NavController) {
+fun WelcomeScreen(onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -79,9 +79,7 @@ fun WelcomeScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(48.dp))
             Button(
-                onClick = {
-                    navController.navigate(Screens.Home.route)
-                },
+                onClick = onClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
