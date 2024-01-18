@@ -96,7 +96,7 @@ fun WelcomeScreen(onClick: () -> Unit) {
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
-                    painter = painterResource(id = R.drawable.icon),
+                    painter = painterResource(id = R.drawable.icon__3_),
                     contentDescription = "Next",
                     tint = Color.White,
                     modifier = Modifier.size(16.dp)

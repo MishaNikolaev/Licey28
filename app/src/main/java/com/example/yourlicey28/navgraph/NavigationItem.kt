@@ -12,13 +12,13 @@ sealed class Screens(val route: String, val imageVector: Int, val label: String)
     object Home : Screens(
         route = NavCons.home,
         label = "Главная",
-        imageVector = R.drawable.icon
+        imageVector = R.drawable.home_icon
     )
 
     object News : Screens(
         route = NavCons.news,
         label = "Новости",
-        imageVector = R.drawable.icon
+        imageVector = R.drawable.icon__1_
     )
 
     object Profile : Screens(

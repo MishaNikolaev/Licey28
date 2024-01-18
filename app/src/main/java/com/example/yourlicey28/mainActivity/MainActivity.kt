@@ -15,6 +15,8 @@ import com.example.yourlicey28.navgraph.Graph
 import com.example.yourlicey28.navgraph.MyNavHost
 import com.example.yourlicey28.navgraph.RootGraph
 import com.example.yourlicey28.navgraph.Screens
+import com.example.yourlicey28.presentation.example_viewmodel.ExampleViewModelScreen
+import com.example.yourlicey28.presentation.mvi_task.MainScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -22,8 +24,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            WindowCompat.setDecorFitsSystemWindows(window, false)
-            val navController = rememberNavController()
-            RootGraph(navController, startDestination = Graph.WELCOME)
+           // val navController = rememberNavController()
+         // RootGraph(navController, startDestination = Graph.WELCOME)
+            //ExampleViewModelScreen()
+            MainScreen()
         }
     }
 }

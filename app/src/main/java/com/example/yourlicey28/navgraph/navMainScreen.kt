@@ -54,7 +54,6 @@ fun BottomNav(
 
         )
     NavigationBar(
-
     ) {
         list.forEachIndexed { index, screens ->
             NavigationBarItem(

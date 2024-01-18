@@ -69,6 +69,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
     //Compose Navigation
     implementation ("androidx.navigation:navigation-compose:2.6.0")
 
