@@ -3,20 +3,8 @@ package com.example.yourlicey28.mainActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.yourlicey28.navgraph.BottomNav
-import com.example.yourlicey28.navgraph.Graph
-import com.example.yourlicey28.navgraph.MyNavHost
-import com.example.yourlicey28.navgraph.RootGraph
-import com.example.yourlicey28.navgraph.Screens
-import com.example.yourlicey28.presentation.example_viewmodel.ExampleViewModelScreen
-import com.example.yourlicey28.presentation.mvi_task.MainScreen
+import com.example.yourlicey28.navigation.NavGraph
 
 
 class MainActivity : ComponentActivity() {
@@ -24,10 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            WindowCompat.setDecorFitsSystemWindows(window, false)
-           // val navController = rememberNavController()
+        val navController = rememberNavController()
          // RootGraph(navController, startDestination = Graph.WELCOME)
-            //ExampleViewModelScreen()
-            MainScreen()
+            NavGraph(navController = navController)
         }
     }
 }
