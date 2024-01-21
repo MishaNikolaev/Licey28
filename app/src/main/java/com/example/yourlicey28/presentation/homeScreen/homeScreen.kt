@@ -50,7 +50,7 @@ fun HomeScreen() {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(modifier = Modifier.align(CenterHorizontally)) {
                     Image(
-                        painter = painterResource(id = R.drawable.ondevelop),
+                        painter = painterResource(id = R.drawable.frame_632),
                         contentDescription = "Welcome Illustration",
                         modifier = Modifier
                             .width(256.dp)
@@ -65,7 +65,7 @@ fun HomeScreen() {
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Image(
-                        painter = painterResource(id = R.drawable.ondevelop),
+                        painter = painterResource(id = R.drawable.frame_638__1_),
                         contentDescription = "Welcome Illustration",
                         modifier = Modifier
                             .width(256.dp)
@@ -79,20 +79,6 @@ fun HomeScreen() {
                             )
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Image(
-                        painter = painterResource(id = R.drawable.ondevelop),
-                        contentDescription = "Welcome Illustration",
-                        modifier = Modifier
-                            .width(256.dp)
-                            .height(256.dp)
-                            .background(Color.White)
-                            .clickable(
-                                enabled = true,
-                                onClickLabel = "Clickable image",
-                                onClick = {
-                                }
-                            )
-                    )
                 }
             }
         }

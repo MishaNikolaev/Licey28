@@ -53,7 +53,7 @@ fun BottomBar(navController: NavHostController) {
     val currentDestination = navBackStackEntry?.destination // health
     val bottomBarDestination = screens.any { it.route == currentDestination?.route } //health
     if (bottomBarDestination) {
-        BottomNavigation {
+        BottomNavigation() {
             screens.forEach { screen ->
                 AddItem(
                     screen = screen,

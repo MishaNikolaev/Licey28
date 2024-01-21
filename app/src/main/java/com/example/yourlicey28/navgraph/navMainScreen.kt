@@ -53,8 +53,8 @@ fun BottomNav(
         Screens.Profile
 
         )
-    NavigationBar(
-
+    NavigationBar(modifier = Modifier.background(Blue),
+        containerColor = Blue,
     ) {
         list.forEachIndexed { index, screens ->
             NavigationBarItem(
