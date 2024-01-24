@@ -1,6 +1,6 @@
 package com.example.yourlicey28.viewmodel.presentation
 
-import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,20 +12,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -33,21 +31,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.yourlicey28.R
-import com.example.yourlicey28.presentation.users.User
-import com.example.yourlicey28.presentation.users.UsersEvent
-import com.example.yourlicey28.presentation.users.UsersState
 import com.example.yourlicey28.viewmodel.Book
 import com.example.yourlicey28.viewmodel.BookEvent
 import com.example.yourlicey28.viewmodel.BookState
 
+private const val TAG = "BooksViewModelScreen"
 
-@SuppressLint("UnrememberedMutableState")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BooksScreen(
     state: BookState,
@@ -55,32 +50,50 @@ fun BooksScreen(
     onBooksDetailScreenClick: (book: Book) -> Unit
 ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        BookCard(
-            books = state.bookList,
-            processEvent = processEvent,
-            onBooksDetailScreenClick = onBooksDetailScreenClick
-        )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.End
-        ) {
+    Scaffold(
+        floatingActionButton = {
             FloatingActionButton(
-                onClick = { processEvent(BookEvent.Add)}, modifier = Modifier.padding(16.dp), shape = CircleShape,
+                onClick = { processEvent(BookEvent.Add) },
+                modifier = Modifier.padding(16.dp),
+                shape = CircleShape,
                 containerColor = Color.Blue,
                 contentColor = Color.White
             ) {
                 Icon(Icons.Filled.Add, "Floating action button.")
             }
         }
-
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .padding(16.dp)
+        ) {
+            BookCard(
+                books = state.bookList,
+                processEvent = processEvent,
+                onBooksDetailScreenClick = onBooksDetailScreenClick
+            )
+        }
     }
 }
+
+//        Column(
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Bottom,
+//            horizontalAlignment = Alignment.End
+//        ) {
+//            FloatingActionButton(
+//                onClick = { processEvent(BookEvent.Add)}, modifier = Modifier.padding(16.dp), shape = CircleShape,
+//                containerColor = Color.Blue,
+//                contentColor = Color.White
+//            ) {
+//                Icon(Icons.Filled.Add, "Floating action button.")
+//            }
+//        }
+//
+//    }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -90,7 +103,7 @@ fun BookCard(
     onBooksDetailScreenClick: (book: Book) -> Unit
 ) {
     LazyColumn {
-        items(books) { book ->
+        itemsIndexed(books, key = { _, book -> book.name }) { index, book ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -107,16 +120,17 @@ fun BookCard(
                         modifier = Modifier.size(180.dp)
                     )
                     Column {
-                        var value by remember { mutableStateOf("") }
                         var isEditing by remember { mutableStateOf(false) }
-                        var textValue by remember { mutableStateOf("Книга") }
-                        var textValueInfo by remember { mutableStateOf("Описание") }
+                        var bookName by remember { mutableStateOf(book.name) }
+                        var bookShortDescription by remember { mutableStateOf(book.shortDescription) }
+
+                        Log.d(TAG, "BookCard: $isEditing\n$bookName\n$bookShortDescription")
 
                         TextField(
-                            value = textValue,
+                            value = bookName,
                             onValueChange = {
                                 if (isEditing) {
-                                    textValue = it
+                                    bookName = it
                                 }
                             },
                             label = { Text("Название книги") },
@@ -129,10 +143,10 @@ fun BookCard(
                         Spacer(modifier = Modifier.height(16.dp))
 
                         TextField(
-                            value = textValueInfo,
+                            value = bookShortDescription,
                             onValueChange = {
                                 if (isEditing) {
-                                    textValueInfo = it
+                                    bookShortDescription = it
                                 }
                             },
                             label = { Text("Краткое\nописание книги") },
@@ -149,6 +163,15 @@ fun BookCard(
                             Button(
                                 onClick = {
                                     isEditing = !isEditing
+                                    if (!isEditing) {
+                                        processEvent(
+                                            BookEvent.Edit(
+                                                index = index,
+                                                name = bookName,
+                                                shortDescription = bookShortDescription
+                                            )
+                                        )
+                                    }
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth(0.5f)
@@ -160,12 +183,14 @@ fun BookCard(
                                 Text(if (isEditing) "Сохранить" else "Изменить")
                             }
 
-                            Button(
-                                onClick = { processEvent(BookEvent.Remove(book = book)) },
-                                modifier = Modifier.padding(end = 20.dp),
-                                colors = ButtonDefaults.buttonColors(Color.Red)
-                            ) {
-                                Text(text = "Удалить")
+                            if (!isEditing) {
+                                Button(
+                                    onClick = { processEvent(BookEvent.Remove(book = book)) },
+                                    modifier = Modifier.padding(end = 20.dp),
+                                    colors = ButtonDefaults.buttonColors(Color.Red)
+                                ) {
+                                    Text(text = "Удалить")
+                                }
                             }
                         }
                     }

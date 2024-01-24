@@ -30,25 +30,27 @@ fun BooksNavGraph(
                 state = viewModel.state.value,
                 processEvent = viewModel::processEvent,
                 onBooksDetailScreenClick = {
-                    navController.navigate(BooksScreens.BookDetaisScreen.route + "?name=${it.name}&number=${it.number}")
+                    navController.navigate(BooksScreens.BookDetaisScreen.route + "?name=${it.name}&shortDescription=${it.shortDescription}&fullDescription=${it.fullDescription}")
                 }
             )
         }
 
         composable(
-            route = BooksScreens.BookDetaisScreen.route + "?name={name}&number={number}",
+            route = BooksScreens.BookDetaisScreen.route + "?name={name}&shortDescription={shortDescription}&fullDescription={fullDescription}",
             arguments = listOf(
                 navArgument("name") { type = NavType.StringType },
-                navArgument("number") { type = NavType.IntType }
+                navArgument("shortDescription") { type = NavType.StringType },
+                navArgument("fullDescription") { type = NavType.StringType }
             )
         ) { navBackStackEntry ->
             val name = navBackStackEntry.arguments?.getString("name")
-            val number = navBackStackEntry.arguments?.getInt("number")
-            if (name != null && number != null) {
+            val shortDescription = navBackStackEntry.arguments?.getString("shortDescription")
+            val fullDescription = navBackStackEntry.arguments?.getString("fullDescription")
+            if (name != null && shortDescription != null && fullDescription != null) {
                 BookDetailsScreen(
                     name = name,
-                    age = number,
-                    fullDescription = "Замысел эпопеи формировался задолго до начала работы над тем текстом, который известен под названием «Война и мир». В наброске предисловия к «Войне и миру» Толстой писал, что в 1856 году начал писать повесть, «герой которой должен был быть декабрист, возвращающийся с семейством в Россию. Невольно от настоящего я перешёл к 1825 году… Но и в 1825 году герой мой был уже возмужалым, семейным человеком. Чтобы понять его, мне нужно было перенестись к его молодости, и молодость его совпала с … эпохой 1812 года… Ежели причина нашего торжества была не случайна, но лежала в сущности характера русского народа и войска, то характер этот должен был выразиться ещё ярче в эпоху неудач и поражений…». Так Лев Николаевич постепенно пришёл к необходимости начать повествование с 1805 года. Главная тема — историческая судьба русского народа в Отечественной войне 1812 года. В романе выведено более 550 персонажей, как вымышленных, так и исторических. Лучших своих героев Л. Н. Толстой изображает во всей их душевной сложности, в непрерывных поисках истины, в стремлении к самосовершенствованию. Таковы князь Андрей, граф Николай, граф Пьер, графиня Наташа и княжна Марья. Отрицательные герои лишены развития, динамики, движений души: Элен, Анатоль."
+                    shortDescription = shortDescription,
+                    fullDescription = fullDescription
                 )
             }
         }

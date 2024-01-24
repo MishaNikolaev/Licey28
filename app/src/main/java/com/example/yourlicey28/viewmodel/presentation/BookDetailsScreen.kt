@@ -19,7 +19,7 @@ import com.example.yourlicey28.R
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BookDetailsScreen(name: String, age: Int,fullDescription:String ) {
+fun BookDetailsScreen(name: String, shortDescription: String,fullDescription:String ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +27,7 @@ fun BookDetailsScreen(name: String, age: Int,fullDescription:String ) {
     ) {
         androidx.compose.material3.Text(
             text = "Название: ${name}" +
-                    "\nНомер: ${age}"
+                    "\nКраткое описание: ${shortDescription}"
         )
         Image(
             painter = painterResource(id = R.drawable.bandicam_2024_01_22_18_06_43_475),
