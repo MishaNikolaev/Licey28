@@ -12,7 +12,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.navgraph.BottomNav
 import com.example.yourlicey28.navgraph.Graph
-import com.example.yourlicey28.navgraph.MyNavHost
 import com.example.yourlicey28.navgraph.RootGraph
 import com.example.yourlicey28.navgraph.Screens
 

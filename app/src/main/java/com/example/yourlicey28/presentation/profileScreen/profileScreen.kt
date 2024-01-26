@@ -82,7 +82,6 @@ fun ProfileScreen(onClick:()->Unit) {
                     modifier = Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.Start,
                 ) {
-                    // Replace with actual image resource
                     Image(
                         painter = painterResource(id = R.drawable.person),
                         contentDescription = "Welcome Illustration",

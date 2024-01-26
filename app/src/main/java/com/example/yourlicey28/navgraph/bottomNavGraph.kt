@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.yourlicey28.presentation.homeScreen.HomeScreen
 import com.example.yourlicey28.presentation.newsScreen.NewsScreen
 
-
+/*
 @Composable
 fun MyNavHost(
     navHostController: NavHostController,
@@ -29,3 +29,4 @@ fun MyNavHost(
         })
 
 }
+*/

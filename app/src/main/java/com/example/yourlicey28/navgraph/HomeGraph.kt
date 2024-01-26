@@ -22,7 +22,9 @@ fun HomeGraph(navController: NavHostController) {
             HomeScreen()
         }
         composable(route = HomeGraphScreen.News.route) {
-            NewsScreen()
+            NewsScreen(onClick = {
+                navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route)
+            })
         }
         composable(route = HomeGraphScreen.Profile.route) {
             ProfileScreen(onClick = {
@@ -33,6 +35,7 @@ fun HomeGraph(navController: NavHostController) {
         composable(route = ProfileGraphScreen.LessonsKruzkiScreen.route) {
             LessonsKruzhki()
         }
+
     }
 }
 

@@ -1,5 +1,7 @@
 package com.example.yourlicey28.presentation.components
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,6 +37,7 @@ import com.example.yourlicey28.ui.theme.robotoFamily
 @Composable
 fun ProfileTabRowCard() {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
     Row(modifier = Modifier.horizontalScroll(scrollState)) {
         Image(
             painter = painterResource(id = R.drawable.licey28),
@@ -42,12 +46,10 @@ fun ProfileTabRowCard() {
                 .width(132.dp)
                 .height(132.dp)
                 .background(Color.White)
-                .clickable(
-                    enabled = true,
-                    onClickLabel = "Clickable image",
-                    onClick = {
-                    }
-                )
+                .clickable {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://lic28nsk.edusite.ru/"))
+                    context.startActivity(intent)
+                }
         )
         Image(
             painter = painterResource(id = R.drawable.nto),
@@ -72,12 +74,10 @@ fun ProfileTabRowCard() {
                 .width(132.dp)
                 .height(132.dp)
                 .background(Color.White)
-                .clickable(
-                    enabled = true,
-                    onClickLabel = "Clickable image",
-                    onClick = {
-                    }
-                )
+                .clickable {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/lyceum28nsk"))
+                    context.startActivity(intent)
+                }
         )
 
     }

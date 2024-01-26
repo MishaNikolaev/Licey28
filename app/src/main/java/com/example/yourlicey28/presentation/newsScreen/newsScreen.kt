@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.example.yourlicey28.R
+import com.example.yourlicey28.presentation.components.CarouselNewsBar
 import com.example.yourlicey28.presentation.components.NewsCard
 import com.example.yourlicey28.presentation.components.ProfileCard
 import com.example.yourlicey28.presentation.components.ProfileTabRowCard
@@ -59,17 +60,14 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NewsScreen() {
+fun NewsScreen(onClick: () -> Unit) {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    Color.White
-                )
         ) {
             Column() {
-                NewsTopBar()
+                NewsTopBar(onClick = onClick)
                 NewsCard()
             }
         }
@@ -77,10 +75,9 @@ fun NewsScreen() {
 }
 
 @Composable
-fun NewsTopBar() {
+fun NewsTopBar(onClick: () -> Unit) {
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        modifier = Modifier.fillMaxSize()
     ) {
         ImageCarousel(
             images = listOf(
@@ -89,13 +86,13 @@ fun NewsTopBar() {
                 painterResource(id = R.drawable.y490qsnrc_i),
                 painterResource(id = R.drawable.school4)
             ),
-            intervalMillis = 5000
+            intervalMillis = 3000
         )
     }
-    RoundedImageWithText()
+    RoundedImageWithText(onClick = onClick)
     Text(
         text = "Жизнь лицея",
-        modifier = Modifier.padding(top = 5.dp, start = 20.dp),
+        modifier = Modifier.padding(start = 20.dp, top = 20.dp),
         fontFamily = robotoFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
@@ -107,7 +104,6 @@ fun NewsTopBar() {
 fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
     var currentIndex by remember { mutableStateOf(0) }
     val listState = rememberLazyListState()
-
     LaunchedEffect(true) {
         while (true) {
             delay(intervalMillis.toLong())
@@ -115,25 +111,7 @@ fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
             listState.animateScrollToItem(currentIndex)
         }
     }
-// Page Indicators
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Transparent),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        repeat(images.size) { index ->
-            Box(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .size(10.dp)
-                    .background(
-                        color = if (index == currentIndex) Color.White else Color.LightGray,
-                        shape = CircleShape
-                    )
-            )
-        }
-    }
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -147,7 +125,7 @@ fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
                         contentDescription = null,
                         modifier = Modifier
                             .width(400.dp)
-                            .height(300.dp)
+                            .height(279.dp)
                     )
                 }
             }
@@ -156,10 +134,10 @@ fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
 }
 
 @Composable
-fun RoundedImageWithText(
+fun RoundedImageWithText(onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier.height(100.dp).padding(start=25.dp)
+        modifier = Modifier.height(100.dp).padding(start=25.dp,top=20.dp)
             .fillMaxWidth(0.9f)
             .clip(RoundedCornerShape(20.dp))
     ) {
@@ -170,8 +148,7 @@ fun RoundedImageWithText(
             modifier = Modifier.fillMaxSize().clickable(
                 enabled = true,
                 onClickLabel = "Clickable image",
-                onClick = {
-                }
+                onClick = onClick
             )
         )
         Text(
