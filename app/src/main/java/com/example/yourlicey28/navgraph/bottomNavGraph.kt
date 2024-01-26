@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.yourlicey28.presentation.homeScreen.HomeScreen
 import com.example.yourlicey28.presentation.newsScreen.NewsScreen
-import com.example.yourlicey28.presentation.profileScreen.ProfileScreen
 
 
 @Composable
@@ -25,7 +24,7 @@ fun MyNavHost(
                 NewsScreen()
             }
             composable(NavCons.profile) {
-                ProfileScreen()
+//                ProfileScreen()
             }
         })
 

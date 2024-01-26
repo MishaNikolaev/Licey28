@@ -35,20 +35,21 @@ import com.example.yourlicey28.ui.theme.Purple
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(onClick: () -> Unit) {
     Column() {
         Row() {
-            Box(modifier = Modifier
-                .shadow(elevation = 20.dp)
-                .clickable(
-                    enabled = true,
-                    onClickLabel = "Clickable image",
-                    onClick = {
-                    }
-                )
-                .size(150.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Pink)) {
+            Box(
+                modifier = Modifier
+                    .shadow(elevation = 20.dp)
+                    .clickable(
+                        enabled = true,
+                        onClickLabel = "Clickable image",
+                        onClick = onClick
+                    )
+                    .size(150.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Pink)
+            ) {
                 Text(
                     text = "Кружки и" +
                             "\nдополнительные" +
@@ -64,7 +65,9 @@ fun ProfileCard() {
                     "Получай новые знания" +
                             "\nв внеурочное" +
                             "\nвремя.",
-                    modifier = Modifier.align(Alignment.CenterStart).padding(start = 5.dp, top = 35.dp),
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(start = 5.dp, top = 35.dp),
                     fontFamily = robotoFamily,
                     fontWeight = FontWeight.Medium,
                     fontSize = 12.sp,
@@ -188,7 +191,9 @@ fun ProfileCard() {
                             "\nзвонков. Образцовый" +
                             "\nлицеист не пропускает" +
                             "\nзанятия.",
-                    modifier = Modifier.align(Alignment.CenterStart).padding(start = 10.dp, top = 10.dp),
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(start = 10.dp, top = 10.dp),
                     fontFamily = robotoFamily,
                     fontWeight = FontWeight.Medium,
                     fontSize = 12.sp,
