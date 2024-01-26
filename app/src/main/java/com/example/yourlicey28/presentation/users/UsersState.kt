@@ -1,9 +1,8 @@
 package com.example.yourlicey28.presentation.users
 
-data class User(
-    val name: String,
-    val age: Int
-)
+import com.example.yourlicey28.domain.model.User
+
+
 data class UsersState(
     val userList: List<User> = listOf()
 )

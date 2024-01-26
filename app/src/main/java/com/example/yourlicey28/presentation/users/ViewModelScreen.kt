@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.R
+import com.example.yourlicey28.domain.model.User
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -85,20 +86,21 @@ fun UserCard(
                         .padding(16.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.person),
+                        painter = painterResource(id = user.image),
                         contentDescription = "Welcome Illustration",
                         modifier = Modifier
                             .padding()
                             .width(50.dp)
                             .height(50.dp)
                     )
-                    Text(text = "Имя: ${user.name}")
-                    Text(text = "Возраст: ${user.age}")
-                    IconButton(onClick = {
-                        processEvent(UsersEvent.Remove(user = user))
-                    }) {
-                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
-                    }
+                    Text(text = "id:${user.id}")
+                    Text(text = "Name: ${user.name}")
+                    Text(text = "Gender: ${user.gender}")
+//                    IconButton(onClick = {
+//                        processEvent(UsersEvent.Remove(user = user))
+//                    }) {
+//                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
+//                    }
                 }
             }
         }

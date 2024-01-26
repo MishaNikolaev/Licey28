@@ -3,8 +3,10 @@ package com.example.yourlicey28.presentation.users
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.yourlicey28.domain.model.User
+import com.example.yourlicey28.domain.repository.Repository
 
-class UsersViewModel : ViewModel() {
+class UsersViewModel(private val repository: Repository) : ViewModel() {
     private val _state = mutableStateOf(UsersState())
     val state: State<UsersState> = _state
 
@@ -16,9 +18,8 @@ class UsersViewModel : ViewModel() {
     }
 
     private fun addUser() {
-        val newUser = User("User${(1..100).random()}", (18..60).random())
-        val users = _state.value.userList
-        _state.value = _state.value.copy(userList = users + newUser)
+        val users = repository.addUsers()
+        _state.value = _state.value.copy(userList = users)
     }
 
     private fun removeUser(user: User) {
