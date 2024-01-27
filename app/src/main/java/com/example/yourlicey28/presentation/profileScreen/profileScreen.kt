@@ -118,7 +118,7 @@ fun ProfileScreen(onClick:()->Unit) {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                ProfileTabRowCard()
+                ProfileTabRowCard(onClick = onClick)
                 Spacer(modifier = Modifier.height(32.dp))
                 ProfileCard(
                     onClick = onClick

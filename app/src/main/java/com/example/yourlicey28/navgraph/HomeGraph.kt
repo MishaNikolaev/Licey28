@@ -5,10 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.yourlicey28.presentation.components.ProfileTabRowCard
 import com.example.yourlicey28.presentation.homeScreen.HomeScreen
 import com.example.yourlicey28.presentation.newsScreen.NewsScreen
 import com.example.yourlicey28.presentation.profileScreen.ProfileScreen
 import com.example.yourlicey28.presentation.profileScreen.lessons.LessonsKruzhki
+import com.example.yourlicey28.presentation.profileScreen.ntoSchool.NtoSchool
 
 private const val TAG = "HomeGraph"
 @Composable
@@ -30,10 +32,15 @@ fun HomeGraph(navController: NavHostController) {
             ProfileScreen(onClick = {
                 Log.d(TAG, "HomeGraph: CLICKED")
                 navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route)
+                navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route)
             })
         }
         composable(route = ProfileGraphScreen.LessonsKruzkiScreen.route) {
             LessonsKruzhki()
+        }
+
+        composable(route = ProfileGraphScreen.NtoSchoolScreen.route) {
+            NtoSchool()
         }
 
     }
@@ -47,4 +54,6 @@ sealed class HomeGraphScreen(val route: String) {
 
 sealed class ProfileGraphScreen(val route: String) {
     object LessonsKruzkiScreen : ProfileGraphScreen(route = "LessonsKruzkiScreen")
+
+    object NtoSchoolScreen : ProfileGraphScreen(route = "NtoSchoolScreen")
 }

@@ -35,7 +35,7 @@ import com.example.yourlicey28.R
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileTabRowCard() {
+fun ProfileTabRowCard(onClick:()->Unit) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     Row(modifier = Modifier.horizontalScroll(scrollState)) {
@@ -61,8 +61,7 @@ fun ProfileTabRowCard() {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = {
-                    }
+                    onClick = onClick
                 )
         )
 
