@@ -27,7 +27,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.R
+import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.ui.theme.LightGreen
 import com.example.yourlicey28.ui.theme.Orange
 import com.example.yourlicey28.ui.theme.Pink
@@ -35,7 +37,8 @@ import com.example.yourlicey28.ui.theme.Purple
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileCard(onClick: () -> Unit) {
+fun ProfileCard() {
+    val navController = rememberNavController()
     Column() {
         Row() {
             Box(
@@ -44,7 +47,7 @@ fun ProfileCard(onClick: () -> Unit) {
                     .clickable(
                         enabled = true,
                         onClickLabel = "Clickable image",
-                        onClick = onClick
+                        onClick = { navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route) }
                     )
                     .size(150.dp)
                     .clip(RoundedCornerShape(16.dp))

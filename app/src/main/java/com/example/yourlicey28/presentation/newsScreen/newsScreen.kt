@@ -49,8 +49,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.R
-import com.example.yourlicey28.presentation.components.CarouselNewsBar
+import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.presentation.components.NewsCard
 import com.example.yourlicey28.presentation.components.ProfileCard
 import com.example.yourlicey28.presentation.components.ProfileTabRowCard
@@ -60,14 +61,14 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NewsScreen(onClick: () -> Unit) {
+fun NewsScreen() {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             Column() {
-                NewsTopBar(onClick = onClick)
+                NewsTopBar()
                 NewsCard()
             }
         }
@@ -75,7 +76,7 @@ fun NewsScreen(onClick: () -> Unit) {
 }
 
 @Composable
-fun NewsTopBar(onClick: () -> Unit) {
+fun NewsTopBar() {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -89,7 +90,7 @@ fun NewsTopBar(onClick: () -> Unit) {
             intervalMillis = 3000
         )
     }
-    RoundedImageWithText(onClick = onClick)
+    RoundedImageWithText()
     Text(
         text = "Жизнь лицея",
         modifier = Modifier.padding(start = 20.dp, top = 20.dp),
@@ -124,8 +125,8 @@ fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
                         painter = image,
                         contentDescription = null,
                         modifier = Modifier
-                            .width(400.dp)
-                            .height(279.dp)
+                            .fillMaxWidth()
+                            .height(256.dp)
                     )
                 }
             }
@@ -134,10 +135,14 @@ fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
 }
 
 @Composable
-fun RoundedImageWithText(onClick: () -> Unit
+fun RoundedImageWithText(
 ) {
+    val navController = rememberNavController()
+
     Box(
-        modifier = Modifier.height(100.dp).padding(start=25.dp,top=20.dp)
+        modifier = Modifier
+            .height(100.dp)
+            .padding(start = 25.dp, top = 20.dp)
             .fillMaxWidth(0.9f)
             .clip(RoundedCornerShape(20.dp))
     ) {
@@ -145,11 +150,13 @@ fun RoundedImageWithText(onClick: () -> Unit
             painter = painterResource(id =R.drawable._613301682_96_p_sinii_fon_abstraktsiya_geometriya_140),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize().clickable(
-                enabled = true,
-                onClickLabel = "Clickable image",
-                onClick = onClick
-            )
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable(
+                    enabled = true,
+                    onClickLabel = "Clickable image",
+                    onClick = { navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route) }
+                )
         )
         Text(
             text = "Олимпиада НТО" +

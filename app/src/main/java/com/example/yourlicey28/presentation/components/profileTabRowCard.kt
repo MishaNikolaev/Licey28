@@ -31,12 +31,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.R
+import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileTabRowCard(onClick:()->Unit) {
+fun ProfileTabRowCard() {
     val scrollState = rememberScrollState()
+    val navController = rememberNavController()
     val context = LocalContext.current
     Row(modifier = Modifier.horizontalScroll(scrollState)) {
         Image(
@@ -61,7 +64,7 @@ fun ProfileTabRowCard(onClick:()->Unit) {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = onClick
+                    onClick = { navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route) }
                 )
         )
 

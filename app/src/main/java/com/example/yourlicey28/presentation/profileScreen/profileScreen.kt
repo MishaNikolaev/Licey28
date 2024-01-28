@@ -62,11 +62,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.compose.rememberNavController
+import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.presentation.components.ProfileCard
 
 
 @Composable
-fun ProfileScreen(onClick:()->Unit) {
+fun ProfileScreen() {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(
             modifier = Modifier
@@ -118,11 +120,9 @@ fun ProfileScreen(onClick:()->Unit) {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                ProfileTabRowCard(onClick = onClick)
+                ProfileTabRowCard()
                 Spacer(modifier = Modifier.height(32.dp))
-                ProfileCard(
-                    onClick = onClick
-                )
+                ProfileCard()
             }
         }
     }
