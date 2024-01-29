@@ -68,7 +68,8 @@ import com.example.yourlicey28.presentation.components.ProfileCard
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(onClick:() -> Unit,
+                  onClickProfileCard:() -> Unit) {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(
             modifier = Modifier
@@ -120,9 +121,9 @@ fun ProfileScreen() {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                ProfileTabRowCard()
+                ProfileTabRowCard(onClick = onClick)
                 Spacer(modifier = Modifier.height(32.dp))
-                ProfileCard()
+                ProfileCard(onClickProfileCard = onClickProfileCard)
             }
         }
     }

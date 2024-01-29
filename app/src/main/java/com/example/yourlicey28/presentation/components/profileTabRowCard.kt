@@ -37,7 +37,7 @@ import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileTabRowCard() {
+fun ProfileTabRowCard(onClick: () -> Unit) {
     val scrollState = rememberScrollState()
     val navController = rememberNavController()
     val context = LocalContext.current
@@ -50,7 +50,8 @@ fun ProfileTabRowCard() {
                 .height(132.dp)
                 .background(Color.White)
                 .clickable {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://lic28nsk.edusite.ru/"))
+                    val intent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse("https://lic28nsk.edusite.ru/"))
                     context.startActivity(intent)
                 }
         )
@@ -64,7 +65,7 @@ fun ProfileTabRowCard() {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = { navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route) }
+                    onClick = onClick
                 )
         )
 

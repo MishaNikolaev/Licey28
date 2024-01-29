@@ -13,6 +13,7 @@ import com.example.yourlicey28.presentation.profileScreen.lessons.LessonsKruzhki
 import com.example.yourlicey28.presentation.profileScreen.ntoSchool.NtoSchool
 
 private const val TAG = "HomeGraph"
+
 @Composable
 fun HomeGraph(navController: NavHostController) {
     NavHost(
@@ -29,10 +30,16 @@ fun HomeGraph(navController: NavHostController) {
             )
         }
         composable(route = HomeGraphScreen.Profile.route) {
-            ProfileScreen(
+            ProfileScreen(onClick = {
+                navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route)
+            },
+                onClickProfileCard = {
+                    navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route)
+                }
+
                 //navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route)
-                        //navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route)
-        )
+                //navController.navigate(ProfileGraphScreen.NtoSchoolScreen.route)
+            )
         }
         composable(route = ProfileGraphScreen.LessonsKruzkiScreen.route) {
             LessonsKruzhki()

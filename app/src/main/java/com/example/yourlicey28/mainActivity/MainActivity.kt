@@ -28,9 +28,8 @@ class MainActivity : ComponentActivity() {
         setContent {
 //            WindowCompat.setDecorFitsSystemWindows(window, false)
             val navController = rememberNavController()
-            //RootGraph(navController, startDestination = Graph.WELCOME)
+            RootGraph(navController, startDestination = Graph.WELCOME)
 
-            NaborFirstClass()
         }
     }
 }

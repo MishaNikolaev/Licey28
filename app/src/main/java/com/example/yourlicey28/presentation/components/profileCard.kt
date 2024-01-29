@@ -37,7 +37,7 @@ import com.example.yourlicey28.ui.theme.Purple
 import com.example.yourlicey28.ui.theme.robotoFamily
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(onClickProfileCard:() -> Unit) {
     val navController = rememberNavController()
     Column() {
         Row() {
@@ -47,7 +47,7 @@ fun ProfileCard() {
                     .clickable(
                         enabled = true,
                         onClickLabel = "Clickable image",
-                        onClick = { navController.navigate(ProfileGraphScreen.LessonsKruzkiScreen.route) }
+                        onClick = onClickProfileCard
                     )
                     .size(150.dp)
                     .clip(RoundedCornerShape(16.dp))
@@ -92,8 +92,7 @@ fun ProfileCard() {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = {
-                    }
+                    onClick = onClickProfileCard
                 )
                 .size(150.dp)
                 .clip(RoundedCornerShape(16.dp))
@@ -134,8 +133,7 @@ fun ProfileCard() {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = {
-                    }
+                    onClick = onClickProfileCard
                 )
                 .size(150.dp)
                 .clip(RoundedCornerShape(16.dp))
@@ -174,8 +172,7 @@ fun ProfileCard() {
                 .clickable(
                     enabled = true,
                     onClickLabel = "Clickable image",
-                    onClick = {
-                    }
+                    onClick = onClickProfileCard
                 )
                 .size(150.dp)
                 .clip(RoundedCornerShape(16.dp))
