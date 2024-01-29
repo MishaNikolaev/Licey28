@@ -15,6 +15,7 @@ import com.example.yourlicey28.navgraph.Graph
 import com.example.yourlicey28.navgraph.RootGraph
 import com.example.yourlicey28.navgraph.Screens
 import com.example.yourlicey28.presentation.homeScreen.licey28Info.Licey28Info
+import com.example.yourlicey28.presentation.homeScreen.nabor1class.NaborFirstClass
 import com.example.yourlicey28.presentation.profileScreen.lessons.LessonsKruzhki
 import com.example.yourlicey28.presentation.profileScreen.ntoSchool.NtoSchool
 import com.example.yourlicey28.presentation.profileScreen.timeTableZvonkov.TimeTableZvokov
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             //RootGraph(navController, startDestination = Graph.WELCOME)
 
-            Licey28Info()
+            NaborFirstClass()
         }
     }
 }
