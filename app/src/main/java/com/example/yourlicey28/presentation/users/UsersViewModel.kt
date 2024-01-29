@@ -3,8 +3,10 @@ package com.example.yourlicey28.presentation.users
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.yourlicey28.domain.model.User
 import com.example.yourlicey28.domain.repository.Repository
+import kotlinx.coroutines.launch
 
 class UsersViewModel(private val repository: Repository) : ViewModel() {
     private val _state = mutableStateOf(UsersState())
@@ -18,8 +20,10 @@ class UsersViewModel(private val repository: Repository) : ViewModel() {
     }
 
     private fun addUser() {
-        val users = repository.addUsers()
-        _state.value = _state.value.copy(userList = users)
+        viewModelScope.launch {
+            val users = repository.addUsers()
+            _state.value = _state.value.copy(userList = users)
+        }
     }
 
     private fun removeUser(user: User) {

@@ -85,17 +85,18 @@ fun UserCard(
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = user.image),
-                        contentDescription = "Welcome Illustration",
-                        modifier = Modifier
-                            .padding()
-                            .width(50.dp)
-                            .height(50.dp)
-                    )
+//                    Image(
+//                        ,
+//                        contentDescription = "Welcome Illustration",
+//                        modifier = Modifier
+//                            .padding()
+//                            .width(50.dp)
+//                            .height(50.dp)
+//                    )
                     Text(text = "id:${user.id}")
                     Text(text = "Name: ${user.name}")
                     Text(text = "Gender: ${user.gender}")
+                    Text(text = "Image: ${user.image}")
 //                    IconButton(onClick = {
 //                        processEvent(UsersEvent.Remove(user = user))
 //                    }) {

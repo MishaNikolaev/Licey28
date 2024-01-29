@@ -7,13 +7,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.yourlicey28.data.remote.RetrofitInstance
 import com.example.yourlicey28.data.repository.RepositoryImpl
 import com.example.yourlicey28.domain.repository.Repository
 import com.example.yourlicey28.presentation.users.UsersScreen
 import com.example.yourlicey28.presentation.users.UsersViewModel
 
 
-val repositoryImpl = RepositoryImpl()
+val repositoryImpl = RepositoryImpl(RetrofitInstance.api)
 
 @Composable
 fun NavGraph(
