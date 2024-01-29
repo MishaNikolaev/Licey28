@@ -8,6 +8,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -50,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.LazyPagingItems
 import com.example.yourlicey28.R
 import com.example.yourlicey28.navgraph.ProfileGraphScreen
 import com.example.yourlicey28.presentation.components.NewsCard
@@ -77,9 +80,7 @@ fun NewsScreen() {
 
 @Composable
 fun NewsTopBar() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Surface() {
         ImageCarousel(
             images = listOf(
                 painterResource(id = R.drawable.school_image),
@@ -101,35 +102,82 @@ fun NewsTopBar() {
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImageCarousel(images: List<Painter>, intervalMillis: Int) {
-    var currentIndex by remember { mutableStateOf(0) }
-    val listState = rememberLazyListState()
-    LaunchedEffect(true) {
-        while (true) {
-            delay(intervalMillis.toLong())
-            currentIndex = (currentIndex + 1) % images.size
-            listState.animateScrollToItem(currentIndex)
+//    var currentIndex by remember { mutableStateOf(0) }
+//    val listState = rememberLazyListState()
+//    LaunchedEffect(true) {
+//        while (true) {
+//            delay(intervalMillis.toLong())
+//            currentIndex = (currentIndex + 1) % images.size
+//            listState.animateScrollToItem(currentIndex)
+//        }
+//    }
+
+
+//    Column(
+//        modifier = Modifier.fillMaxSize(),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+
+        val pagerState = rememberPagerState(
+            initialPage = 0,
+            initialPageOffsetFraction = 0f
+        ) {
+            images.size
         }
+
+        HorizontalPager(
+            state = pagerState,
+            contentPadding = PaddingValues(horizontal = 32.dp),
+            pageSpacing = 16.dp
+        ) { page ->
+            Image(
+                painter = images[page],
+                contentDescription = null,
+                modifier = Modifier
+//                    .fillMaxWidth()
+                    .height(256.dp)
+            )
+        }
+//            LazyRow(state = listState,modifier = Modifier.fillMaxWidth()) {
+//                items(images) { image ->
+//                    Image(
+//                        painter = image,
+//                        contentDescription = null,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .height(256.dp)
+//                    )
+//                }
+//            }
+
+        DotIndicators(
+            pageCount = images.size,
+            pagerState = pagerState,
+            modifier = Modifier.fillMaxSize().background(Color.Red)
+        )
     }
+}
+//}
 
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box {
-            LazyRow(state = listState) {
-                items(images) { image ->
-                    Image(
-                        painter = image,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(256.dp)
-                    )
-                }
-            }
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun DotIndicators(
+    pageCount: Int,
+    pagerState: PagerState,
+    modifier: Modifier
+) {
+    Row(modifier = modifier) {
+        repeat(pageCount) { iteration ->
+            val color = if (pagerState.currentPage == iteration) Color.Gray else Color.LightGray
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(color)
+            )
         }
     }
 }
@@ -147,7 +195,7 @@ fun RoundedImageWithText(
             .clip(RoundedCornerShape(20.dp))
     ) {
         Image(
-            painter = painterResource(id =R.drawable._613301682_96_p_sinii_fon_abstraktsiya_geometriya_140),
+            painter = painterResource(id = R.drawable._613301682_96_p_sinii_fon_abstraktsiya_geometriya_140),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
