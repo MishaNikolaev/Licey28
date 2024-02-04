@@ -3,6 +3,7 @@ package com.example.yourlicey28.data.repository
 import com.example.yourlicey28.R
 import com.example.yourlicey28.data.remote.RickMortyApi
 import com.example.yourlicey28.domain.model.User
+import com.example.yourlicey28.domain.model.UserDetails
 import com.example.yourlicey28.domain.repository.Repository
 
 class RepositoryImpl(private val api: RickMortyApi) : Repository {
@@ -22,6 +23,12 @@ class RepositoryImpl(private val api: RickMortyApi) : Repository {
         }
 
         return usersList.toList()
+    }
+
+    override suspend fun getUser(id: Int): UserDetails {
+        val response = api.getCharacter(id = id)
+
+        return response
     }
 
 }
