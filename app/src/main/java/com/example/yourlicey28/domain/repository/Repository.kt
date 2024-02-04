@@ -9,8 +9,4 @@ interface Repository {
     suspend fun addUsers():List<User>
 
     suspend fun getUser(id:Int):UserDetails
-
-    suspend fun addImages():List<ImageData>
-
-    suspend fun getImages(id:Int):ImageDataDetails
 }
