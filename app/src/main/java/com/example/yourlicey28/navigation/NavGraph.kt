@@ -130,18 +130,18 @@ fun NavGraph(
                 navArgument("id") { type = NavType.IntType }
             )
         ) { navBackStackEntry ->
-            val viewModel: CarsDetailViewModel =
-                viewModel(factory = CarDetailViewModelFactory(repositoryImplCar))
-
-            val id = navBackStackEntry.arguments?.getInt("id")
-            if (id != null) {
-                viewModel.processEvent(event = CarsDetailEvent.GetCar(id=id))
-
-                CarsDetailScreen(
-                    state = viewModel.state.value,
-                    processEvent = viewModel::processEvent,
-                )
-            }
+//            val viewModel: CarsDetailViewModel =
+//                viewModel(factory = CarDetailViewModelFactory(repositoryImplCar))
+//
+//            val id = navBackStackEntry.arguments?.getInt("id")
+//            if (id != null) {
+//                viewModel.processEvent(event = CarsDetailEvent.GetCar(id=id))
+//
+//                CarsDetailScreen(
+//                    state = viewModel.state.value,
+//                    processEvent = viewModel::processEvent,
+//                )
+//            }
 
         }
     }
@@ -213,12 +213,12 @@ class CarViewModelFactory(private val repository: RepositoryCar) : ViewModelProv
     }
 }
 
-class CarDetailViewModelFactory(private val repository: RepositoryCar) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CarsDetailViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CarsDetailViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+//class CarDetailViewModelFactory(private val repository: RepositoryCar) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(CarsDetailViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return CarsDetailViewModel(repository) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}
