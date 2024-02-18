@@ -1,5 +1,6 @@
 package com.example.yourlicey28.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,10 +12,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.yourlicey28.data.remote.RetrofitInstance
 import com.example.yourlicey28.data.remote.dto.RetrofitImageInstance
+import com.example.yourlicey28.data.remote.dto.RetrofitInstanceCar
 import com.example.yourlicey28.data.repository.RepositoryImpl
+import com.example.yourlicey28.data.repository.RepositoryImplCar
 import com.example.yourlicey28.data.repository.RepositoryImplTask
 import com.example.yourlicey28.domain.repository.Repository
+import com.example.yourlicey28.domain.repository.RepositoryCar
 import com.example.yourlicey28.domain.repository.RepositoryTask
+import com.example.yourlicey28.presentation.cars.CarScreen
+import com.example.yourlicey28.presentation.cars.CarsViewModel
+import com.example.yourlicey28.presentation.carsDetail.CarsDetailEvent
+import com.example.yourlicey28.presentation.carsDetail.CarsDetailScreen
+import com.example.yourlicey28.presentation.carsDetail.CarsDetailViewModel
 import com.example.yourlicey28.presentation.images.ImageScreen
 import com.example.yourlicey28.presentation.images.ImagesViewModel
 import com.example.yourlicey28.presentation.imagesDetail.ImageDetailScreen
@@ -29,6 +38,7 @@ import com.example.yourlicey28.presentation.users.UsersViewModel
 
 val repositoryImpl = RepositoryImpl(RetrofitInstance.api)
 val repositoryImplTask = RepositoryImplTask(RetrofitImageInstance.api)
+val repositoryImplCar = RepositoryImplCar(RetrofitInstanceCar.api)
 
 @Composable
 fun NavGraph(
@@ -36,7 +46,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.ImageListScreen.route
+        startDestination = Screens.CarListScreen.route
     ) {
         composable(Screens.UserListScreen.route) {
             val viewModel: UsersViewModel =
@@ -102,6 +112,38 @@ fun NavGraph(
             }
 
         }
+
+        composable(route = Screens.CarListScreen.route){
+            val viewModel: CarsViewModel =
+                viewModel(factory = CarViewModelFactory(repositoryImplCar))
+
+            CarScreen(
+                state = viewModel.state.value,
+                processEvent = viewModel::processEvent,
+                onCarDetailScreenClick = {
+                    navController.navigate(Screens.CarDetailsScreen.route + "?id=${it.id}")
+                }
+            )
+        }
+        composable(route = Screens.CarDetailsScreen.route + "?id={id}",
+            arguments = listOf(
+                navArgument("id") { type = NavType.IntType }
+            )
+        ) { navBackStackEntry ->
+            val viewModel: CarsDetailViewModel =
+                viewModel(factory = CarDetailViewModelFactory(repositoryImplCar))
+
+            val id = navBackStackEntry.arguments?.getInt("id")
+            if (id != null) {
+                viewModel.processEvent(event = CarsDetailEvent.GetCar(id=id))
+
+                CarsDetailScreen(
+                    state = viewModel.state.value,
+                    processEvent = viewModel::processEvent,
+                )
+            }
+
+        }
     }
 }
 
@@ -134,6 +176,10 @@ sealed class Screens(val route: String) {
     object ImageListScreen: Screens("image_list_screen")
 
     object ImageDetailsScreen: Screens("image_details_screen")
+
+    object CarListScreen: Screens("car_list_screen")
+
+    object CarDetailsScreen: Screens("car_details_screen")
 }
 
 
@@ -152,6 +198,26 @@ class ImagesViewModelFactory(private val repository: RepositoryTask) : ViewModel
         if (modelClass.isAssignableFrom(ImagesViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ImagesViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
+
+class CarViewModelFactory(private val repository: RepositoryCar) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CarsViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CarsViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
+
+class CarDetailViewModelFactory(private val repository: RepositoryCar) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CarsDetailViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CarsDetailViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

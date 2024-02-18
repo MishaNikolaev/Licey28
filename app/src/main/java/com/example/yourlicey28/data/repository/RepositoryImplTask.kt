@@ -6,32 +6,6 @@ import com.example.yourlicey28.domain.model.ImageDataDetails
 import com.example.yourlicey28.domain.repository.RepositoryTask
 
 class RepositoryImplTask(private val api: ImagesApi) : RepositoryTask {
-    //    override suspend fun addImage(): List<ImageData> {
-//        val response = api.getImages(page = 1)
-//        val imagesList = mutableListOf<ImageData>()
-//
-//        response.results.forEach {
-//            imagesList.add(
-//                ImageData(
-//                    id = it.id,
-//                    author = it.author,
-//                    url = it.url,
-//                    width = it.width,
-//                    height = it.height
-//                )
-//            )
-//        }
-//
-//        return imagesList.toList()
-//    }
-//
-//
-//
-//    override suspend fun getImage(id: Int): ImageDataDetails {
-//        val response = api.getImages(id = id)
-//
-//        return response
-//    }
     override suspend fun getImages(): List<ImageDataDetails> {
         val response = api.getImages(page = 1, limit = 100)
         val imagesList = mutableListOf<ImageDataDetails>()
