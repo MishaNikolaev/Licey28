@@ -4,10 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.yourlicey28.domain.repository.Repository
 import com.example.yourlicey28.domain.repository.RepositoryTask
-import com.example.yourlicey28.presentation.userdetail.UserDetailEvent
-import com.example.yourlicey28.presentation.userdetail.UserDetailState
 import kotlinx.coroutines.launch
 
 class ImagesDetailViewModel(private val repository: RepositoryTask) : ViewModel() {

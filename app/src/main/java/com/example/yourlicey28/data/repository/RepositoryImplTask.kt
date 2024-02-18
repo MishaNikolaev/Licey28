@@ -1,23 +1,19 @@
 package com.example.yourlicey28.data.repository
 
-import com.example.yourlicey28.data.remote.dto.ImagesApi
+import android.util.Log
+import com.example.yourlicey28.data.remote.ImagesApi
 import com.example.yourlicey28.data.remote.dto.toImageDataDetail
 import com.example.yourlicey28.domain.model.ImageDataDetails
 import com.example.yourlicey28.domain.repository.RepositoryTask
 
+private const val TAG = "RepositoryImplTask"
 class RepositoryImplTask(private val api: ImagesApi) : RepositoryTask {
-    override suspend fun getImages(): List<ImageDataDetails> {
-        val response = api.getImages(page = 1, limit = 100)
+    override suspend fun getImages(page:Int): List<ImageDataDetails> {
+        val response = api.getImages(page = page, limit = 20)
+        Log.d(TAG, "getImages: $response")
         val imagesList = mutableListOf<ImageDataDetails>()
         response.forEach {
             imagesList.add( it.toImageDataDetail()
-//                ImageDataDetails(
-//                    id = it.id,
-//                    author = it.author,
-//                    url = it.url,
-//                    width = it.width,
-//                    height = it.height
-//                )
             )
         }
         return imagesList.toList()

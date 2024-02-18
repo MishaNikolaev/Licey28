@@ -1,12 +1,9 @@
-package com.example.yourlicey28.data.remote.dto
+package com.example.yourlicey28.data.remote
 
-import com.example.yourlicey28.data.remote.RickMortyApi
-import com.example.yourlicey28.domain.model.ImageDataDetails
-import com.example.yourlicey28.domain.model.UserDetails
+import com.example.yourlicey28.data.remote.dto.ImageDataDetailsDto
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
