@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+//  room
+    id("kotlin-kapt")
 }
 
 android {
@@ -48,6 +50,7 @@ android {
         }
     }
 }
+val roomVersion = "2.4.2"
 
 dependencies {
 
@@ -85,4 +88,10 @@ dependencies {
 
     //Coil - Image
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // Для использования Kotlin Coroutines
+    implementation("androidx.room:room-ktx:$roomVersion")
 }

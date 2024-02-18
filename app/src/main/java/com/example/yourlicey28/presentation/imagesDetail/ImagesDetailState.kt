@@ -1,7 +1,5 @@
 package com.example.yourlicey28.presentation.imagesDetail
 
-import com.example.yourlicey28.domain.model.ImageDataDetails
-
 
 data class ImagesDetailState (
     val imageDetail: ImageDataDetails = ImageDataDetails(

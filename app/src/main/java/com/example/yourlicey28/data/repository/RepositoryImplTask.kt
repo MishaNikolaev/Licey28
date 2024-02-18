@@ -1,34 +1,36 @@
 package com.example.yourlicey28.data.repository
 
 import android.util.Log
-import com.example.yourlicey28.data.remote.ImagesApi
-import com.example.yourlicey28.data.remote.dto.toImageDataDetail
-import com.example.yourlicey28.domain.model.ImageDataDetails
+import com.example.yourlicey28.data.local.AppDatabase
+import com.example.yourlicey28.data.local.entity.toUser
+import com.example.yourlicey28.domain.model.User
+import com.example.yourlicey28.domain.model.toUserEntity
 import com.example.yourlicey28.domain.repository.RepositoryTask
 
 private const val TAG = "RepositoryImplTask"
-class RepositoryImplTask(private val api: ImagesApi) : RepositoryTask {
-    override suspend fun getImages(page:Int): List<ImageDataDetails> {
-        val response = api.getImages(page = page, limit = 20)
-        Log.d(TAG, "getImages: $response")
-        val imagesList = mutableListOf<ImageDataDetails>()
-        response.forEach {
-            imagesList.add( it.toImageDataDetail()
-            )
+class RepositoryImplTask(private val db: AppDatabase) : RepositoryTask {
+    override suspend fun getUsers(): List<User> {
+        val userEntities = db.userDao().getAll()
+        val users = userEntities.map {
+            it.toUser()
         }
-        return imagesList.toList()
+        return users
     }
 
-    override suspend fun getImage(id: Int): ImageDataDetails {
-        val response = api.getImage(id = id) //ImageDetailsDto
-//        val imageDataDetails = ImageDataDetails(
-//            id = response.id,
-//            author = response.author,
-//            url = response.url,
-//            width = response.width,
-//            height = response.height
-//        )
-        return response.toImageDataDetail()
+    override suspend fun getUser(id: Int): User {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insert(user: User) {
+        val userEntity = db.userDao().insert(user.toUserEntity())
+    }
+
+    override suspend fun update(user: User) {
+        val userEntity = db.userDao().update(user.toUserEntity())
+    }
+
+    override suspend fun delete(user: User) {
+        val userEntity = db.userDao().delete(user.toUserEntity())
     }
 
 
