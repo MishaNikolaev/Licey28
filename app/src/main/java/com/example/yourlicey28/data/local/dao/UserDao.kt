@@ -10,17 +10,20 @@ import com.example.yourlicey28.data.local.entity.UserEntity
 @Dao
 interface UserDao {
     @Query("SELECT * FROM userentity") // извлекает все записи из таблицы
-    fun getAll(): List<UserEntity>
+    suspend fun getAll(): List<UserEntity>
+
+    @Query("SELECT * FROM userentity WHERE id=:id")
+    suspend fun getById(id: Int): UserEntity
 
     @Insert // Запрос для добавления списка
-    fun insertAll(users: List<UserEntity>)
+    suspend fun insertAll(users: List<UserEntity>)
 
     @Insert // Запрос для добавления
-    fun insert(user: UserEntity)
+    suspend fun insert(user: UserEntity)
 
     @Delete
-    fun delete(user: UserEntity)
+    suspend fun delete(user: UserEntity)
 
     @Update
-    fun update(user: UserEntity)
+    suspend fun update(user: UserEntity)
 }

@@ -6,7 +6,7 @@ import com.example.yourlicey28.domain.model.User
 
 @Entity
 data class UserEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String
 )

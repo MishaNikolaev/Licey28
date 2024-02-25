@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 //  room
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -91,7 +91,8 @@ dependencies {
 
     //Room
     implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+
+    ksp("androidx.room:room-compiler:$roomVersion")
     // Для использования Kotlin Coroutines
     implementation("androidx.room:room-ktx:$roomVersion")
 }

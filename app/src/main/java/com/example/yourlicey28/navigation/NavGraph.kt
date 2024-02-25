@@ -1,66 +1,49 @@
 package com.example.yourlicey28.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.example.yourlicey28.data.remote.RetrofitImageInstance
+import androidx.room.Room
+import com.example.yourlicey28.data.local.AppDatabase
 import com.example.yourlicey28.data.repository.RepositoryImplTask
 import com.example.yourlicey28.domain.repository.RepositoryTask
-import com.example.yourlicey28.presentation.images.ImageScreen
-import com.example.yourlicey28.presentation.images.ImagesViewModel
-import com.example.yourlicey28.presentation.imagesDetail.ImageDetailScreen
-import com.example.yourlicey28.presentation.imagesDetail.ImagesDetailEvent
-import com.example.yourlicey28.presentation.imagesDetail.ImagesDetailViewModel
+import com.example.yourlicey28.presentation.images.UsersScreen
+import com.example.yourlicey28.presentation.images.UsersViewModel
+import kotlinx.coroutines.launch
 
-
-val repositoryImplTask = RepositoryImplTask(RetrofitImageInstance.api)
 
 @Composable
 fun NavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    db:AppDatabase
 ) {
+    val repositoryImpl = RepositoryImplTask(db = db)
+
     NavHost(
         navController = navController,
-        startDestination = Screens.ImageListScreen.route
+        startDestination = Screens.UsersScreen.route
     ) {
 
-        composable(route = Screens.ImageListScreen.route){
-            val viewModel: ImagesViewModel =
-                viewModel(factory = ImagesViewModelFactory(repositoryImplTask))
+        composable(route = Screens.UsersScreen.route){
+            val viewModel: UsersViewModel =
+                viewModel(factory = UsersViewModelFactory(repositoryImpl))
 
-            ImageScreen(
+            UsersScreen(
                 state = viewModel.state.value,
                 processEvent = viewModel::processEvent,
-                onImageDetailScreenClick = {
+                /*onImageDetailScreenClick = {
                     navController.navigate(Screens.ImageDetailsScreen.route + "?id=${it.id}")
-                }
+                }*/
             )
         }
-        composable(route = Screens.ImageDetailsScreen.route + "?id={id}",
-            arguments = listOf(
-                navArgument("id") { type = NavType.IntType }
-            )
-        ) { navBackStackEntry ->
-            val viewModel: ImagesDetailViewModel =
-                viewModel(factory = ImageDetailViewModelFactory(repositoryImplTask))
 
-            val id = navBackStackEntry.arguments?.getInt("id")
-            if (id != null) {
-                viewModel.processEvent(event = ImagesDetailEvent.GetImage(id=id))
-
-                ImageDetailScreen(
-                    state = viewModel.state.value,
-                    processEvent = viewModel::processEvent,
-                )
-            }
-
-        }
 
     }
 }
@@ -68,34 +51,16 @@ fun NavGraph(
 
 
 sealed class Screens(val route: String) {
-    object UserListScreen : Screens("user_list_screen")
-    object UserDetailsScreen : Screens("user_details_screen")
+    object UsersScreen: Screens("users_screen")
 
-    object ImageListScreen: Screens("image_list_screen")
-
-    object ImageDetailsScreen: Screens("image_details_screen")
-
-    object CarListScreen: Screens("car_list_screen")
-
-    object CarDetailsScreen: Screens("car_details_screen")
 }
 
 
-class ImageDetailViewModelFactory(private val repository: RepositoryTask) : ViewModelProvider.Factory {
+class UsersViewModelFactory(private val repository: RepositoryTask) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ImagesDetailViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(UsersViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ImagesDetailViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
-
-class ImagesViewModelFactory(private val repository: RepositoryTask) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ImagesViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ImagesViewModel(repository) as T
+            return UsersViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
