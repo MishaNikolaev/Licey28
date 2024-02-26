@@ -37,7 +37,7 @@ import com.example.yourlicey28.domain.model.User
 fun UsersScreen(
     state: UserState,
     processEvent: (UserEvent) -> Unit,
-    //onImageDetailScreenClick: (image: ImageDataDetails) -> Unit
+    onUserDetailScreenClick: (user: User) -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -54,20 +54,21 @@ fun UsersScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            ImageCard(
+            UserCard(
                 processEvent = processEvent,
-                users = state.usersList
+                users = state.usersList,
+                onUserDetailScreenClick = onUserDetailScreenClick
             )
         }
     }
 }
 
 @Composable
-fun ImageCard(
+fun UserCard(
     //isLoading: Boolean,
     ///endIsReached: Boolean,
     users: List<User>,
-    //onImageDetailScreenClick: (images: ImageDataDetails) -> Unit,
+    onUserDetailScreenClick: (user: User) -> Unit,
     processEvent: (UserEvent) -> Unit
 ) {
 
@@ -79,7 +80,7 @@ fun ImageCard(
                     .fillMaxWidth()
                     .padding(8.dp)
                     .clickable {
-                        //onImageDetailScreenClick(image)
+                        onUserDetailScreenClick(item)
                     }
             ) {
                 Column(

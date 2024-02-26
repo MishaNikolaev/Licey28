@@ -3,6 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 //  room
     id("com.google.devtools.ksp")
+//hilt
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -32,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "18"
     }
     buildFeatures {
         compose = true
@@ -95,4 +98,8 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     // Для использования Kotlin Coroutines
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
 }

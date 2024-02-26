@@ -18,7 +18,8 @@ class RepositoryImplTask(private val db: AppDatabase) : RepositoryTask {
     }
 
     override suspend fun getUser(id: Int): User {
-        TODO("Not yet implemented")
+        val user = db.userDao().getById(id = id)
+        return user.toUser()
     }
 
     override suspend fun insert(user: User) {
