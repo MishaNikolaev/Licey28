@@ -1,7 +1,6 @@
 package com.example.yourlicey28.data.remote.dto
 
 import com.example.yourlicey28.domain.model.CarDataDetails
-import com.example.yourlicey28.domain.model.ImageDataDetails
 import com.google.gson.annotations.SerializedName
 
 

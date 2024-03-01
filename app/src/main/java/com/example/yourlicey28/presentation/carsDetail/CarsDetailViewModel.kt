@@ -6,12 +6,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourlicey28.domain.repository.RepositoryCar
-import com.example.yourlicey28.domain.repository.RepositoryTask
-import com.example.yourlicey28.presentation.imagesDetail.ImagesDetailEvent
-import com.example.yourlicey28.presentation.imagesDetail.ImagesDetailState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
-class CarsDetailViewModel(
+import javax.inject.Inject
+@HiltViewModel
+class CarsDetailViewModel @Inject constructor(
     private val repository: RepositoryCar,
     private val savedStateHandle: SavedStateHandle
     ) : ViewModel() {
