@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -26,10 +27,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NavGraph(
-    navController: NavHostController,
-    db: AppDatabase
+    navController: NavHostController
 ) {
-    val repositoryImpl = RepositoryImplTask(db = db)
 
     NavHost(
         navController = navController,
@@ -37,8 +36,7 @@ fun NavGraph(
     ) {
 
         composable(route = Screens.UsersScreen.route) {
-            val viewModel: UsersViewModel =
-                viewModel(factory = UsersViewModelFactory(repositoryImpl))
+            val viewModel: UsersViewModel = hiltViewModel()
 
             UsersScreen(
                 state = viewModel.state.value,
@@ -48,21 +46,18 @@ fun NavGraph(
                 }
             )
         }
+
         composable(route = Screens.UserDetailScreen.route + "?id={id}",
             arguments = listOf(
                 navArgument("id") { type = NavType.IntType }
             )) { navBackStackEntry ->
-            val viewModel: UserDetailViewModel =
-                viewModel(factory = UsersDetailViewModelFactory(repositoryImpl))
-            val id = navBackStackEntry.arguments?.getInt("id")
-            if (id != null) {
-                viewModel.processEvent(event = UserDetailEvent.GetUser(id = id))
+            val viewModel: UserDetailViewModel = hiltViewModel()
 
-                UserDetailScreen(
-                    state = viewModel.state.value,
-                    processEvent = viewModel::processEvent,
-                )
-            }
+            UserDetailScreen(
+                state = viewModel.state.value,
+                processEvent = viewModel::processEvent,
+            )
+
         }
 
     }
@@ -75,26 +70,5 @@ sealed class Screens(val route: String) {
 
 }
 
-
-class UsersViewModelFactory(private val repository: RepositoryTask) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UsersViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return UsersViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
-
-class UsersDetailViewModelFactory(private val repository: RepositoryTask) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UserDetailViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return UserDetailViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
 
 

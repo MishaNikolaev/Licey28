@@ -6,9 +6,11 @@ import com.example.yourlicey28.data.local.entity.toUser
 import com.example.yourlicey28.domain.model.User
 import com.example.yourlicey28.domain.model.toUserEntity
 import com.example.yourlicey28.domain.repository.RepositoryTask
+import javax.inject.Inject
 
 private const val TAG = "RepositoryImplTask"
-class RepositoryImplTask(private val db: AppDatabase) : RepositoryTask {
+
+class RepositoryImplTask @Inject constructor(private val db: AppDatabase) : RepositoryTask {
     override suspend fun getUsers(): List<User> {
         val userEntities = db.userDao().getAll()
         val users = userEntities.map {

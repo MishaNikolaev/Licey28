@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourlicey28.domain.model.User
 import com.example.yourlicey28.domain.repository.RepositoryTask
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.random.Random
 
-class UsersViewModel(private val repository: RepositoryTask) : ViewModel() {
+@HiltViewModel
+class UsersViewModel @Inject constructor(private val repository: RepositoryTask) : ViewModel() {
     private val _state = mutableStateOf(UserState())
     val state: State<UserState> = _state
 
@@ -46,7 +49,7 @@ class UsersViewModel(private val repository: RepositoryTask) : ViewModel() {
         }
     }
 
-    private fun removeUser(user:User){
+    private fun removeUser(user: User) {
         viewModelScope.launch {
             repository.delete(user = user)
             val userList = repository.getUsers()
@@ -54,8 +57,8 @@ class UsersViewModel(private val repository: RepositoryTask) : ViewModel() {
         }
     }
 
-    private fun updateUser(user:User){
-        viewModelScope.launch{
+    private fun updateUser(user: User) {
+        viewModelScope.launch {
             val updatedUser = user.copy(name = generateRandomString(5))
             repository.update(user = updatedUser)
             val updatedAllUsers = repository.getUsers()
@@ -64,7 +67,8 @@ class UsersViewModel(private val repository: RepositoryTask) : ViewModel() {
     }
 
     fun generateRandomString(length: Int): String {
-        val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') // Диапазон символов для генерации случайной строки
+        val charPool: List<Char> =
+            ('a'..'z') + ('A'..'Z') + ('0'..'9') // Диапазон символов для генерации случайной строки
         return (1..length)
             .map { Random.nextInt(0, charPool.size) }
             .map(charPool::get)

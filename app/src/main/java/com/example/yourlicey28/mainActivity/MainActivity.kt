@@ -7,18 +7,16 @@ import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.yourlicey28.data.local.AppDatabase
 import com.example.yourlicey28.navigation.NavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val db = Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java, "database-name"
-            ).build()
             val navController = rememberNavController()
-            NavGraph(navController = navController, db = db)
+            NavGraph(navController = navController)
         }
     }
 }

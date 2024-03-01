@@ -4,8 +4,9 @@ plugins {
 //  room
     id("com.google.devtools.ksp")
 //hilt
-    kotlin("kapt")
+
     id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -75,8 +76,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+//    ViewModel
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     //Compose Navigation
     implementation ("androidx.navigation:navigation-compose:2.6.0")
@@ -102,4 +103,10 @@ dependencies {
     //hilt
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-android-compiler:2.45")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+}
+
+kapt {
+    correctErrorTypes = true
 }
