@@ -1,5 +1,6 @@
 package com.example.yourlicey28.data.remote.dto
 
+import com.example.yourlicey28.data.local.entity.CarEntity
 import com.example.yourlicey28.domain.model.CarDataDetails
 import com.google.gson.annotations.SerializedName
 
@@ -24,3 +25,8 @@ data class CarsDataDetailsDto(
 fun CarsDataDetailsDto.toCarDataDetail(): CarDataDetails {
     return CarDataDetails(id = id, mark = mark, model = model, description = description, cardPhoto = cardPhoto)
 }
+
+fun CarsDataDetailsDto.toCarEntity(): CarEntity {
+    return CarEntity(id = id, mark = mark, model = model, description = description, cardPhoto = cardPhoto)
+}
+

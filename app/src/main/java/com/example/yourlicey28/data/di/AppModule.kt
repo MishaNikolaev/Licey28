@@ -1,6 +1,9 @@
 package com.example.yourlicey28.data.di
 
 import android.app.Application
+import androidx.room.Room
+import com.example.yourlicey28.data.local.AppDatabase
+import com.example.yourlicey28.data.local.dao.CarsDao
 import com.example.yourlicey28.data.remote.dto.CarsApi
 import dagger.Module
 import dagger.Provides
@@ -22,4 +25,20 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build().create()
     }
+    @Provides
+    @Singleton
+    fun provideAppDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(
+            app,
+            AppDatabase::class.java,
+            "database-name.db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCarsDao(db:AppDatabase):CarsDao{
+        return db.carsDao()
+    }
+
 }
