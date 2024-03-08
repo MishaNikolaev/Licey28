@@ -6,21 +6,24 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourlicey28.domain.repository.RepositoryCar
+import com.example.yourlicey28.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class CarsDetailViewModel @Inject constructor(
     private val repository: RepositoryCar,
     private val savedStateHandle: SavedStateHandle
-    ) : ViewModel() {
+) : ViewModel() {
     private val _state = mutableStateOf(CarsDetailState())
     val state: State<CarsDetailState> = _state
 
-    init{
+    init {
         val id = savedStateHandle.get<Int>("id")
         processEvent(event = CarsDetailEvent.GetCar(id = id!!))
     }
+
     fun processEvent(event: CarsDetailEvent) {
         when (event) {
             is CarsDetailEvent.GetCar -> getCar(id = event.id)
@@ -30,8 +33,23 @@ class CarsDetailViewModel @Inject constructor(
 
     private fun getCar(id: Int) {
         viewModelScope.launch {
-            val carDetail = repository.getCar(id = id)
-            _state.value = _state.value.copy(carsDetail = carDetail)
+            val response = repository.getCar(id = id)
+            response.collect{
+                when (it) {
+                    is Resource.Success -> {
+                        val carDetail = it.data!!
+                        _state.value = _state.value.copy(carsDetail = carDetail)
+                    }
+
+                    is Resource.Loading -> {
+                        _state.value = _state.value.copy(isLoading = it.isLoading)
+                    }
+
+                    is Resource.Error -> {
+                        _state.value = _state.value.copy(error = it.message!!)
+                    }
+                }
+            }
         }
     }
 }

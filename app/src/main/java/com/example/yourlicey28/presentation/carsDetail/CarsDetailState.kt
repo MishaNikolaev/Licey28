@@ -9,5 +9,7 @@ data class CarsDetailState (
         id = 2,
         description = "",
         cardPhoto = ""
-    )
+    ),
+    val isLoading:Boolean = false,
+    val error:String = ""
 )

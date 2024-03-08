@@ -3,6 +3,7 @@ package com.example.yourlicey28.mainActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.yourlicey28.navigation.NavGraph
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +15,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             NavGraph(navController = navController)
+//            val flowViewModel:FlowViewModel = hiltViewModel()
+//            flowViewModel.flowExample()
         }
     }
 }
