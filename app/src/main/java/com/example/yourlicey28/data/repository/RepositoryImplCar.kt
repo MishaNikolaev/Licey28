@@ -12,7 +12,6 @@ class RepositoryImplCar @Inject constructor(private val api: CarsApi) : Reposito
     override suspend fun getCars(): List<CarDataDetails> {
         val response = api.getCars(skip = 0, limit = 30, authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl8xNyIsImV4cCI6MTcwOTcxOTc5NX0.61JANV9HiSXq_XZFs5TSwMn8Sr2pcLoKr3BBlgfWttI")
         val carsList = mutableListOf<CarDataDetails>()
-//        response.
         response.cars.forEach {
             carsList.add(
                 it.toCarDataDetail()

@@ -17,8 +17,6 @@ data class CarsDataDetailsDto(
     val description: String,
     @SerializedName("card_photo")
     val cardPhoto: String
-
-//    val card_photo:String
 )
 
 fun CarsDataDetailsDto.toCarDataDetail(): CarDataDetails {
