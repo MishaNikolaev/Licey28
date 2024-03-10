@@ -5,6 +5,4 @@ import com.example.yourlicey28.domain.model.User
 data class UserState (
 
     val usersList: List<User> = listOf(),
-    //val endIsReached: Boolean = false,
-    //val isLoading: Boolean = false
 )

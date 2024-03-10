@@ -3,9 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 //  room
     id("com.google.devtools.ksp")
-//hilt
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -75,8 +72,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+//    ViewModel
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     //Compose Navigation
     implementation ("androidx.navigation:navigation-compose:2.6.0")
@@ -98,8 +95,4 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     // Для использования Kotlin Coroutines
     implementation("androidx.room:room-ktx:$roomVersion")
-
-    //hilt
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
 }
