@@ -20,16 +20,7 @@ class RepositoryImplTask(private val api: ImagesApi) : RepositoryTask {
     }
 
     override suspend fun getImage(id: Int): ImageDataDetails {
-        val response = api.getImage(id = id) //ImageDetailsDto
-//        val imageDataDetails = ImageDataDetails(
-//            id = response.id,
-//            author = response.author,
-//            url = response.url,
-//            width = response.width,
-//            height = response.height
-//        )
+        val response = api.getImage(id = id)
         return response.toImageDataDetail()
     }
-
-
 }

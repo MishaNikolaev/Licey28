@@ -68,16 +68,11 @@ fun NavGraph(
 
 
 sealed class Screens(val route: String) {
-    object UserListScreen : Screens("user_list_screen")
-    object UserDetailsScreen : Screens("user_details_screen")
 
     object ImageListScreen: Screens("image_list_screen")
 
     object ImageDetailsScreen: Screens("image_details_screen")
 
-    object CarListScreen: Screens("car_list_screen")
-
-    object CarDetailsScreen: Screens("car_details_screen")
 }
 
 

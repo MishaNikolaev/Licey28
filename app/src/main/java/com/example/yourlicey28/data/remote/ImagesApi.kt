@@ -20,18 +20,12 @@ interface ImagesApi {
         @Path("id") id: Int
     ): ImageDataDetailsDto
 
-//    @GET("api/cars/all")
-//    suspend fun getCars(
-//        @Header("Authorization") authorization: String, //Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl8xNyIsImV4cCI6MTcwOTcxOTc5NX0.61JANV9HiSXq_XZFs5TSwMn8Sr2pcLoKr3BBlgfWttI
-//        @Query("skip") skip: Int,
-//        @Query("limit") limit: Int
-//    ): ...
 }
 
 object RetrofitImageInstance {
     val api: ImagesApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://picsum.photos/") // Замените на ваш базовый URL
+            .baseUrl("https://picsum.photos/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ImagesApi::class.java)

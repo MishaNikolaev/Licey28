@@ -94,10 +94,6 @@ fun ImageCard(
                 }
             }
 
-            //    1)если индекс карточки равен последнему индекс imagesList (то есть мы находимся в конце списка ,
-//    доскролили до конца списка) и endIsReached = False, то вызываем event на подгрузку данных (event.GetImages)
-//    2)если isLoading true то показываем circularprogressindicator
-
             if (index == images.size - 1 && !endIsReached) {
                 processEvent(ImagesEvent.GetImages)
             }
