@@ -15,8 +15,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             NavGraph(navController = navController)
-//            val flowViewModel:FlowViewModel = hiltViewModel()
-//            flowViewModel.flowExample()
         }
     }
 }

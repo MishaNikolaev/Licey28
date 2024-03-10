@@ -21,9 +21,6 @@ class RepositoryImplCar @Inject constructor(
     private val api: CarsApi,
     private val carsDao: CarsDao
 ) : RepositoryCar {
-//    Делаем запрос по апи, получаем данные из апи
-//    Добавляем полученные данные в бд
-//    Возвращаем данные из бд
 
     override suspend fun getCars(): Flow<Resource<List<CarDataDetails>>> {
         return flow {
@@ -43,9 +40,6 @@ class RepositoryImplCar @Inject constructor(
                 Log.d(TAG, "getCars: $e")
                 emit(Resource.Error(message = "$e"))
             }
-//        response.cars.forEach {
-//            carsDao.insert(car = it.toCarEntity())
-//        }
             val carsEntities = carsDao.getAll()
 
             val carsDetails = carsEntities.map {
