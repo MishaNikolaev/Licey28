@@ -67,8 +67,6 @@ fun UserCard(
     processEvent: (UsersEvent) -> Unit,
     onUserDetailScreenClick: (user: User) -> Unit
 ) {
-//    val usersViewModel: UsersViewModel = viewModel()
-//    val navController = rememberNavController()
 
     LazyColumn {
         this.items(users) { user ->
@@ -96,11 +94,6 @@ fun UserCard(
                     Text(text = "id:${user.id}")
                     Text(text = "Name: ${user.name}")
                     Text(text = "Gender: ${user.gender}")
-//                    IconButton(onClick = {
-//                        processEvent(UsersEvent.Remove(user = user))
-//                    }) {
-//                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
-//                    }
                 }
             }
         }
