@@ -66,8 +66,6 @@ fun UserCard(
     processEvent: (UsersEvent) -> Unit,
     onUserDetailScreenClick: (user: User) -> Unit
 ) {
-//    val usersViewModel: UsersViewModel = viewModel()
-//    val navController = rememberNavController()
 
     LazyColumn {
         this.items(users) { user ->

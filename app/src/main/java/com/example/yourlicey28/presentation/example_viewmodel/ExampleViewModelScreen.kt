@@ -13,7 +13,6 @@ fun ExampleViewModelScreen(viewModel: ExampleViewModel = androidx.lifecycle.view
     } else if (state.error.isNotEmpty()) {
         // Отображение ошибки
     } else {
-        // Отображение списка пользователей
         Log.d(TAG, "ExampleViewModelScreen: ${state.users}")
     }
 }

@@ -16,7 +16,6 @@ class ExampleViewModel : ViewModel() {
     fun onEvent(event: ExampleViewModelEvent) {
         when (event) {
             is ExampleViewModelEvent.LoadUserList -> {
-                // Загрузить список пользователей
                 val user_1: User = User(name = "Usman")
                 val user_2: User = User(name = "Mikhail")
                 val users: List<User> = listOf(user_1, user_2)

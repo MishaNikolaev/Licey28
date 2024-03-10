@@ -11,10 +11,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            WindowCompat.setDecorFitsSystemWindows(window, false)
             val navController = rememberNavController()
-//            RootGraph(navController, startDestination = Graph.WELCOME)
-//            NavGraph(navController = navController)
             BooksNavGraph(navController = navController)
         }
     }
