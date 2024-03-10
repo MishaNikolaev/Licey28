@@ -13,9 +13,6 @@ import javax.inject.Inject
 
 private const val TAG = "RepositoryImplCar"
 class RepositoryImplCar @Inject constructor(private val api: CarsApi, private val carsDao: CarsDao) : RepositoryCar {
-//    Делаем запрос по апи, получаем данные из апи
-//    Добавляем полученные данные в бд
-//    Возвращаем данные из бд
 
     override suspend fun getCars(): List<CarDataDetails> {
         try{
@@ -28,9 +25,6 @@ class RepositoryImplCar @Inject constructor(private val api: CarsApi, private va
         catch (e: Exception){
             Log.d(TAG, "getCars: $e")
         }
-//        response.cars.forEach {
-//            carsDao.insert(car = it.toCarEntity())
-//        }
         val carsEntities = carsDao.getAll()
 
         val carsDetails = carsEntities.map {

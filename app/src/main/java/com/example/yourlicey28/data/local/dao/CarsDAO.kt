@@ -28,10 +28,3 @@ interface CarsDao {
     @Update
     suspend fun update(car: CarEntity)
 }
-
-// 1 - TeslaX
-// 2 - TeslaY
-
-//1 - TeslaX1    // 1 - TeslaX
-//2 - TeslaY     // 2 - TeslaY
-                 // 3 - TeslaX1

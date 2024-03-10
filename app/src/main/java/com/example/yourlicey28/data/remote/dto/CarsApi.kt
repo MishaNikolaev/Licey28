@@ -10,12 +10,10 @@ import retrofit2.http.Query
 interface CarsApi {
     @GET("api/cars/all")
     suspend fun getCars(
-        @Header("Authorization") authorization: String, //Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl8xNyIsImV4cCI6MTcwOTcxOTc5NX0.61JANV9HiSXq_XZFs5TSwMn8Sr2pcLoKr3BBlgfWttI
+        @Header("Authorization") authorization: String,
         @Query("skip") skip: Int,
         @Query("limit") limit: Int
     ): CarsAllDto
-
-    //cars : List<Cars>
 
     @GET("api/cars/get_by_id")
     suspend fun getCar(
@@ -27,7 +25,6 @@ object RetrofitInstanceCar {
     val api: CarsApi by lazy {
         Retrofit.Builder()
             .baseUrl("https://bipbip.uz/")
-            // Замените на ваш базовый URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CarsApi::class.java)
