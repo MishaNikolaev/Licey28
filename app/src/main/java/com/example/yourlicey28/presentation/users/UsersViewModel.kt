@@ -27,7 +27,3 @@ class UsersViewModel : ViewModel() {
         _state.value = _state.value.copy(userList = newList)
     }
 }
-
-private fun openUserDetails(user: User) {
-    // Я не понимаю как сделать тут навигацию...
-}

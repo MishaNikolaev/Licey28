@@ -78,23 +78,6 @@ fun BooksScreen(
     }
 }
 
-//        Column(
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Bottom,
-//            horizontalAlignment = Alignment.End
-//        ) {
-//            FloatingActionButton(
-//                onClick = { processEvent(BookEvent.Add)}, modifier = Modifier.padding(16.dp), shape = CircleShape,
-//                containerColor = Color.Blue,
-//                contentColor = Color.White
-//            ) {
-//                Icon(Icons.Filled.Add, "Floating action button.")
-//            }
-//        }
-//
-//    }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookCard(

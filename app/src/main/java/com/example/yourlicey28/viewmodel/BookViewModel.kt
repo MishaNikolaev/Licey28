@@ -56,8 +56,4 @@ class BookViewModel : ViewModel() {
         bookList[index] = book
         _state.value = _state.value.copy(bookList = bookList)
     }
-
-    private fun saveBook(book: Book) {
-
-    }
 }
