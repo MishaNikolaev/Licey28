@@ -3,8 +3,12 @@ package com.example.yourlicey28.presentation.users
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.yourlicey28.domain.model.User
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class UsersViewModel : ViewModel() {
+@HiltViewModel
+class UsersViewModel @Inject constructor() : ViewModel() {
     private val _state = mutableStateOf(UsersState())
     val state: State<UsersState> = _state
 

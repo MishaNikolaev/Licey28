@@ -12,15 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.yourlicey28.R
+import com.example.yourlicey28.presentation.users.UsersEvent
 
 @Composable
-fun UserDetailsScreen(name: String, age: Int) {
+fun UserDetailsScreen(
+    state: UserDetailState,
+    processEvent: (UserDetailEvent) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(text = "Имя ${name} \nAge = ${age}")
+        Text(text = "Имя ${state.user.name} \nAge = ${state.user.age}")
     }
     Image(
         painter = painterResource(id = R.drawable.person),

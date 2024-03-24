@@ -1,12 +1,14 @@
 package com.example.yourlicey28.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.yourlicey28.presentation.user_detail.UserDetailViewModel
 import com.example.yourlicey28.presentation.user_detail.UserDetailsScreen
 import com.example.yourlicey28.presentation.users.UsersScreen
 import com.example.yourlicey28.presentation.users.UsersViewModel
@@ -20,7 +22,7 @@ fun NavGraph(
         startDestination = Screens.UserListScreen.route
     ) {
         composable(Screens.UserListScreen.route) {
-            val viewModel: UsersViewModel = viewModel()
+            val viewModel: UsersViewModel = hiltViewModel()
 
             UsersScreen(
                 state = viewModel.state.value,
@@ -38,11 +40,9 @@ fun NavGraph(
                 navArgument("age") { type = NavType.IntType }
             )
         ) { navBackStackEntry ->
-            val name = navBackStackEntry.arguments?.getString("name")
-            val age = navBackStackEntry.arguments?.getInt("age")
-            if (name != null && age != null) {
-                UserDetailsScreen(name = name, age = age)
-            }
+            val viewModel: UserDetailViewModel = hiltViewModel()
+            UserDetailsScreen(state = viewModel.state.value,
+                processEvent = viewModel::processEvent)
         }
     }
 }

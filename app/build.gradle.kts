@@ -1,6 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+//  room
+    id("com.google.devtools.ksp")
+//hilt
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -30,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -48,6 +53,7 @@ android {
         }
     }
 }
+val roomVersion = "2.4.2"
 
 dependencies {
 
@@ -69,8 +75,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+//    ViewModel
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     //Compose Navigation
     implementation ("androidx.navigation:navigation-compose:2.6.0")
@@ -78,4 +84,28 @@ dependencies {
     //Paging 3
     implementation ("androidx.paging:paging-runtime:3.1.1")
     implementation ("androidx.paging:paging-compose:3.2.0-rc01")
+
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Coil - Image
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+
+    ksp("androidx.room:room-compiler:$roomVersion")
+    // Для использования Kotlin Coroutines
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+}
+
+kapt {
+    correctErrorTypes = true
 }
