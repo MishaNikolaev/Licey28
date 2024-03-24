@@ -8,6 +8,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.yourlicey28.presentation.mvi.MviScreen
+import com.example.yourlicey28.presentation.mvi.MviViewModel
+import com.example.yourlicey28.presentation.mvvm.MvvmScreen
+import com.example.yourlicey28.presentation.mvvm.MvvmViewModel
 import com.example.yourlicey28.presentation.user_detail.UserDetailViewModel
 import com.example.yourlicey28.presentation.user_detail.UserDetailsScreen
 import com.example.yourlicey28.presentation.users.UsersScreen
@@ -19,8 +23,27 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.UserListScreen.route
+        startDestination = MvvmScreen.Main.route
     ) {
+        composable(MviScreen.Main.route){
+            val viewModel: MviViewModel = hiltViewModel()
+
+            MviScreen(
+                state=viewModel.state.value
+            )
+        }
+
+        composable(MvvmScreen.Main.route){
+            val viewModel: MvvmViewModel = hiltViewModel()
+
+            MvvmScreen(
+                viewModel=viewModel,
+                onClick = {
+                    viewModel.updateMessage(newMessage = "UPDATED")
+                }
+            )
+        }
+
         composable(Screens.UserListScreen.route) {
             val viewModel: UsersViewModel = hiltViewModel()
 
@@ -50,4 +73,12 @@ fun NavGraph(
 sealed class Screens(val route: String) {
     object UserListScreen : Screens("user_list_screen")
     object UserDetailsScreen : Screens("user_details_screen")
+}
+
+sealed class MvvmScreen(val route: String) {
+    object Main : MvvmScreen("main")
+}
+
+sealed class MviScreen(val route: String) {
+    object Main : MviScreen("main_mvi")
 }
